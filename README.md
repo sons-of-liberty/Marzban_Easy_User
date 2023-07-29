@@ -2,8 +2,12 @@
 ㅤ
 
 ## Installation
+First install:
+```
+sudo apt install python3-pip -y && pip install pytelegrambotapi
+```
 
-Run this command:
+Then run this command:
 
 ```
 wget https://raw.githubusercontent.com/sons-of-liberty/Marzban_Easy_User/main/main.py && python3 main.py
