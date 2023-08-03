@@ -117,11 +117,11 @@ key = telebot.types.ReplyKeyboardMarkup(resize_keyboard= True, row_width= 2)
 key.add("10 GB", "15 GB", "20 GB", "30 GB", "40 GB", "50 GB", "100 GB")
 def load_auth_file():
     try:
-        authorized_users = json.load(open(f"./Easy_Users/Authorized_users.txt", "r"))
+        authorized_users = json.load(open(f"./Easy_User/Authorized_users.txt", "r"))
 
     except:
         authorized_users = {"admin": admin}
-        with open(f"./Easy_Users/Authorized_users.txt", "w") as auth_file:
+        with open(f"./Easy_User/Authorized_users.txt", "w") as auth_file:
 
             json.dump(authorized_users, auth_file)
 
@@ -155,8 +155,8 @@ def prompt(message):
     if message.text in ["10 GB", "15 GB", "20 GB", "25 GB", "30 GB", "40 GB", "50 GB", "100 GB"]:
         vol = int(message.text.split(" ")[0])
         user = create_user(vol)
-        file1 = open(f"./Easy_Users/Used/{username}--v2ray--{vol}-GB.txt", "a+")
-        with open(f"./Easy_Users/Used/{username}--v2ray--{vol}-GB.txt", "r+") as used:
+        file1 = open(f"./Easy_User/Used/{username}--v2ray--{vol}-GB.txt", "a+")
+        with open(f"./Easy_User/Used/{username}--v2ray--{vol}-GB.txt", "r+") as used:
             num = len(used.readlines()) + 1
             usedline = f"{num}. {user['username']}  {vol}-GB: {user['subscription_url']}"
             used.write(usedline + "\n")
