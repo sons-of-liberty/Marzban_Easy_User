@@ -6,14 +6,15 @@ import datetime
 import telebot
 import os
 
+os.makedirs("Easy_User/Used", exist_ok=True)
 
 ############################### Main Functions ############
 def load_login_data():
     try:
-        login_data = json.load(open(f"./Login_data.txt", "r"))
+        login_data = json.load(open("./Easy_User/Login_data.txt", "r"))
 
     except:
-        with open(f"./Login_data.txt", "w") as login_data_file:
+        with open(f"./Easy_User/Login_data.txt", "w") as login_data_file:
             bot_token = input("Enter Bot Token: ")
             admin = input("Enter Bot admin ID: ")
             domain = input("Enter domain: ")
@@ -100,7 +101,6 @@ def create_user(vol):
 
 ############ Main Body #####################
 
-os.makedirs("./Used", exist_ok=True)
 login_data = load_login_data()
 bot_token = login_data["bot_token"]
 admin = login_data["admin"]
@@ -117,11 +117,11 @@ key = telebot.types.ReplyKeyboardMarkup(resize_keyboard= True, row_width= 2)
 key.add("10 GB", "15 GB", "20 GB", "30 GB", "40 GB", "50 GB", "100 GB")
 def load_auth_file():
     try:
-        authorized_users = json.load(open(f"./Authorized_users.txt", "r"))
+        authorized_users = json.load(open(f"./Easy_Users/Authorized_users.txt", "r"))
 
     except:
         authorized_users = {"admin": admin}
-        with open(f"./Authorized_users.txt", "w") as auth_file:
+        with open(f"./Easy_Users/Authorized_users.txt", "w") as auth_file:
 
             json.dump(authorized_users, auth_file)
 
@@ -155,8 +155,8 @@ def prompt(message):
     if message.text in ["10 GB", "15 GB", "20 GB", "25 GB", "30 GB", "40 GB", "50 GB", "100 GB"]:
         vol = int(message.text.split(" ")[0])
         user = create_user(vol)
-        file1 = open(f"./Used/{username}--v2ray--{vol}-GB.txt", "a+")
-        with open(f"./Used/{username}--v2ray--{vol}-GB.txt", "r+") as used:
+        file1 = open(f"./Easy_Users/Used/{username}--v2ray--{vol}-GB.txt", "a+")
+        with open(f"./Easy_Users/Used/{username}--v2ray--{vol}-GB.txt", "r+") as used:
             num = len(used.readlines()) + 1
             usedline = f"{num}. {user['username']}  {vol}-GB: {user['subscription_url']}"
             used.write(usedline + "\n")
