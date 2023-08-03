@@ -120,7 +120,7 @@ def load_auth_file():
         authorized_users = json.load(open(f"./Easy_User/Authorized_users.txt", "r"))
 
     except:
-        authorized_users = {"admin": admin}
+        authorized_users = {"admin": int(admin)}
         with open(f"./Easy_User/Authorized_users.txt", "w") as auth_file:
 
             json.dump(authorized_users, auth_file)
