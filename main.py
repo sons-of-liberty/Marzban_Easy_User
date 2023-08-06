@@ -53,7 +53,10 @@ def get_users_list():
         response.raise_for_status()
         users_list = response.json()["users"]
         users_list = sorted([i["username"] for i in users_list if i["username"].split("_")[0] == "user"])
-        return users_list
+        if users_list:
+            return users_list
+        else:
+            return None
     except requests.exceptions.RequestException as e:
         logging.error(f'Error occurred while retrieving users list: {e}')
         return None
